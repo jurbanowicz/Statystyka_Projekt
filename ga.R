@@ -13,20 +13,20 @@ rastrigin3d <- makeRastriginFunction(c(3));
 
 
 
-test <- function(func, lbound, ubound){
-  result <- ga(type = "real-valued", fitness =function(x) - func(x), maxiter = 100, monitor = FALSE, lower = c(th = lbound), upper = ubound)
-  return(result@fitnessValue)
+ga_result <- function(func, lbound, ubound){
+  result <- ga(type = "real-valued", fitness =function(x) - func(x), maxiter = 1000, monitor = FALSE, lower = c(th = lbound), upper = ubound)
+  return(result@fitnessValue*(-1))
 };
 
 # 2 dims
-res <- replicate(50, test(ackley2d, rep(-10, 2), rep(10,2)))
+res <- replicate(50, ga_result(ackley2d, rep(-10, 2), rep(10,2)))
 res
 mean(res)
 
 
 
 # 10 dimensions
-res <- replicate(50, test(ackley10d, rep(1, 10), rep(10,10)))
+res <- replicate(50, ga_result(ackley10d, rep(1, 10), rep(10,10)))
 res
 mean(res)
 
