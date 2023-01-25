@@ -30,5 +30,5 @@ result <- replicate(100, prs(rastigin, rep(1, n), rep(100, n), n))
 result
 mean(result)
 hist(result, main = paste("Rastigin  histogram for ", n, " dimensions"))
-boxplot(res, main = paste("Rastigin boxplot for ", n, " dimensions"))
+boxplot(result, main = paste("Rastigin boxplot for ", n, " dimensions"))
 
