@@ -1,10 +1,4 @@
 library(smoof)
-library("GA")
-
-ackley2d <- makeAckleyFunction(c(2))
-ackley10d <- makeAckleyFunction(c(10))
-ackley20d <- makeAckleyFunction(c(20))
-
 
 prs <- function(func, lbound, upbound, dims) {
   best = Inf
@@ -19,8 +13,22 @@ prs <- function(func, lbound, upbound, dims) {
 };
 
 
-result <- replicate(100, prs(ackley10d, rep(1, 10), rep(100, 10), 10))
+# Ackley
+n <- 2
+ackley <- makeAckleyFunction(c(n))
+result <- replicate(100, prs(ackley, rep(1, n), rep(100, n), n))
 result
 mean(result)
+hist(result, main = paste("Ackley  histogram for ", n, " dimensions"))
+boxplot(res, main = paste("Ackley boxplot for ", n, " dimensions"))
 
+
+# Rastrigin
+n <- 20
+rastigin <- makeRastriginFunction(c(n))
+result <- replicate(100, prs(rastigin, rep(1, n), rep(100, n), n))
+result
+mean(result)
+hist(result, main = paste("Rastigin  histogram for ", n, " dimensions"))
+boxplot(res, main = paste("Rastigin boxplot for ", n, " dimensions"))
 
