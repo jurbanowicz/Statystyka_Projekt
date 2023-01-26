@@ -54,4 +54,69 @@ data <- data_frame(method = c(rep("PRS2D",length(ack2d_prs)),rep("GA2D",length(a
 ggplot(data=data, aes(x= method, y=value)) +
   geom_boxplot()+
   ggtitle("Ackley")
+
+t.test(ack2d_ga)
+
+t.test(ack2d_prs)
 ```
+
+```{r main, echo=FALSE}
+data <- data_frame(method = c(rep("PRS10D",length(ack10d_prs)),rep("GA10D",length(ack10d_ga))),value = c(ack10d_prs,ack10d_ga))
+ggplot(data=data, aes(x= method, y=value)) +
+  geom_boxplot()+
+  ggtitle("Ackley")
+
+t.test(ack10d_ga)
+
+t.test(ack10d_prs)
+```
+
+```{r main, echo=FALSE}
+data <- data_frame(method = c(rep("PRS20D",length(ack20d_prs)),rep("GA20D",length(ack20d_ga))),value = c(ack20d_prs,ack20d_ga))
+ggplot(data=data, aes(x= method, y=value)) +
+  geom_boxplot()+
+  ggtitle("Ackley")
+
+t.test(ack2d_ga)
+
+t.test(ack2d_prs)
+```
+
+```{r main, echo=FALSE}
+data <- data_frame(method = c(rep("PRS2D",length(ras2d_prs)),rep("GA2D",length(ras2d_ga))),value = c(ras2d_prs,ras2d_ga))
+ggplot(data=data, aes(x= method, y=value)) +
+  geom_boxplot()+
+  ggtitle("Rastrigin")
+
+t.test(ras2d_ga)
+
+t.test(ras2d_prs)
+```
+
+```{r main, echo=FALSE}
+data <- data_frame(method = c(rep("PRS10D",length(ras10d_prs)),rep("GA10D",length(ras10d_ga))),value = c(ras10d_prs,ras10d_ga))
+ggplot(data=data, aes(x= method, y=value)) +
+  geom_boxplot()+
+  ggtitle("Rastrigin")
+
+t.test(ras10d_ga)
+
+t.test(ras10d_prs)
+```
+
+```{r main, echo=FALSE}
+data <- data_frame(method = c(rep("PRS20D",length(ras20d_prs)),rep("GA20D",length(ras20d_ga))),value = c(ras20d_prs,ras20d_ga))
+ggplot(data=data, aes(x= method, y=value)) +
+  geom_boxplot()+
+  ggtitle("Rastrigin")
+
+t.test(ras20d_ga)
+
+t.test(ras20d_prs)
+```
+
+## Wnioski
+
+Algorytm genetyczny niezależnie od liczby wymiarów oraz funkcji z dużą dokładnością wyznacza minimum zadanej funkcji jednakże jest on bardzo czasochłonny.
+
+Algorytm PRS działa znacznie szybciej aczkolwiek jest on niedokładny i waraz ze wzrostem liczby wymiarów jego wynik znacząco oddala się od faktycznego minimum funkcji oraz wzrasta wariancja otrzymywanych wartości
