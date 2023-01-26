@@ -114,6 +114,25 @@ ggplot(data=data, aes(x= method, y=value)) +
   geom_boxplot()+
   ggtitle("Ackley")
 
+compare_histograms <- function(func_prs, func_ga) {
+  data1 <- data.frame(x = func_prs)
+  data2 <- data.frame(x = func_ga)
+  binw <- max(func_prs) / 100
+  ggplot() +
+    geom_histogram(data = data1, aes(x = x), fill = "blue", alpha = 0.4, binwidth = binw) +
+    geom_histogram(data = data2, aes(x = x), fill = "red", alpha = 0.4, binwidth = binw) +
+    ggtitle("Comparison of Histograms")+
+    xlab("Values") +
+    ylab("Frequency") +
+    scale_fill_identity(name = "Method",
+                        breaks = c("ackley2dprs", "ackley2dga"),
+                        labels = c("ackley2dprs", "ackley2dga"))
+
+}
+
+
+
+
 
 
 
