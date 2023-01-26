@@ -9,11 +9,16 @@ date: "2023-01-26"
 
 ## Dane testowe dla algorytmów
 
-Jako dane testowe dla algorytmów minimalizacji zostały wykorzystane dwie funkcje z biblioteki smoof. Funckja Ackleya oraz funckja Rastrigin'a
+Jako dane testowe dla algorytmów minimalizacji zostały wykorzystane dwie funkcje z biblioteki smoof. Funckja Ackleya oraz funckja Rastrigina. Obydwie funkcje posiadają minimum globalne o wartości 0 w punkcie rep(0, n) gdzie n jest liczbą argumentów funckji.
+
+```{r}
+plot3D(ackley2d)
+plot3D(rastrigin2d)
+```
 
 ## Algorytm PRS
 
-Jako parametry przyjmuję funkcje matematyczną, dla której ma zostać wyznaczone minimum, ograniczenie dolne oraz górne dla funkcji w postaci wektora oraz ile wymiarów posiada funkcja.
+Jako parametry przyjmuję funkcje matematyczną, dla której ma zostać wyznaczone minimum, ograniczenia dolne oraz górne dla funkcji w postaci wektora, a także ile wymiarów posiada funkcja.
 
 ```{r}
 prs <- function(func, lbound, upbound, dims) {
@@ -53,7 +58,9 @@ run_comparison()
 data <- data_frame(method = c(rep("PRS2D",length(ack2d_prs)),rep("GA2D",length(ack2d_ga))),value = c(ack2d_prs,ack2d_ga))
 ggplot(data=data, aes(x= method, y=value)) +
   geom_boxplot()+
-  ggtitle("Ackley")
+  ggtitle("Ackley - 2D")
+
+compare_histograms(ack2d_prs, ack2d_ga)
 
 t.test(ack2d_ga)
 
@@ -64,7 +71,9 @@ t.test(ack2d_prs)
 data <- data_frame(method = c(rep("PRS10D",length(ack10d_prs)),rep("GA10D",length(ack10d_ga))),value = c(ack10d_prs,ack10d_ga))
 ggplot(data=data, aes(x= method, y=value)) +
   geom_boxplot()+
-  ggtitle("Ackley")
+  ggtitle("Ackley - 10D")
+
+compare_histograms(ack10d_prs, ack10d_ga)
 
 t.test(ack10d_ga)
 
@@ -75,20 +84,24 @@ t.test(ack10d_prs)
 data <- data_frame(method = c(rep("PRS20D",length(ack20d_prs)),rep("GA20D",length(ack20d_ga))),value = c(ack20d_prs,ack20d_ga))
 ggplot(data=data, aes(x= method, y=value)) +
   geom_boxplot()+
-  ggtitle("Ackley")
+  ggtitle("Ackley - 20D")
 
-t.test(ack2d_ga)
 
-t.test(ack2d_prs)
+compare_histograms(ack20d_prs, ack20d_ga)
+t.test(ack20d_ga)
+
+t.test(ack20d_prs)
 ```
 
 ```{r main, echo=FALSE}
 data <- data_frame(method = c(rep("PRS2D",length(ras2d_prs)),rep("GA2D",length(ras2d_ga))),value = c(ras2d_prs,ras2d_ga))
 ggplot(data=data, aes(x= method, y=value)) +
   geom_boxplot()+
-  ggtitle("Rastrigin")
+  ggtitle("Rastrigin - 2D")
+compare_histograms(ras2d_prs, ras2d_ga)
 
 t.test(ras2d_ga)
+
 
 t.test(ras2d_prs)
 ```
@@ -97,7 +110,7 @@ t.test(ras2d_prs)
 data <- data_frame(method = c(rep("PRS10D",length(ras10d_prs)),rep("GA10D",length(ras10d_ga))),value = c(ras10d_prs,ras10d_ga))
 ggplot(data=data, aes(x= method, y=value)) +
   geom_boxplot()+
-  ggtitle("Rastrigin")
+  ggtitle("Rastrigin - 10D")
 
 t.test(ras10d_ga)
 
@@ -108,7 +121,9 @@ t.test(ras10d_prs)
 data <- data_frame(method = c(rep("PRS20D",length(ras20d_prs)),rep("GA20D",length(ras20d_ga))),value = c(ras20d_prs,ras20d_ga))
 ggplot(data=data, aes(x= method, y=value)) +
   geom_boxplot()+
-  ggtitle("Rastrigin")
+  ggtitle("Rastrigin - 20D")
+
+compare_histograms(ras20d_prs, ras20d_ga)
 
 t.test(ras20d_ga)
 
