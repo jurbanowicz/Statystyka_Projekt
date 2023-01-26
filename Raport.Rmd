@@ -1,0 +1,57 @@
+---
+title: "Raport"
+output: html_document
+author: "Jacek Urbanowicz, Iwo Szczepaniak"
+date: "2023-01-26"
+---
+
+# Porównanie algorytmów minimalizacji
+
+## Dane testowe dla algorytmów
+
+Jako dane testowe dla algorytmów minimalizacji zostały wykorzystane dwie funkcje z biblioteki smoof. Funckja Ackleya oraz funckja Rastrigin'a
+
+## Algorytm PRS
+
+Jako parametry przyjmuję funkcje matematyczną, dla której ma zostać wyznaczone minimum, ograniczenie dolne oraz górne dla funkcji w postaci wektora oraz ile wymiarów posiada funkcja.
+
+```{r}
+prs <- function(func, lbound, upbound, dims) {
+  best = Inf
+  for (i in (1:1000)) {
+    v <- runif(dims, lbound, upbound)
+    current <- func(v)
+    if (current < best) {
+      best <- current
+    }
+  }
+  return (best)
+};
+
+```
+
+## Algorytm Genetyczny
+
+Drugim użytym algorytmem jest algorytm genetyczny z biblioteki GA. Aby wyznaczyć minimum musimy przekazać naszą funkcję ze znakiem przeciwnym, a na koniec odwrócić otrzymany wynik. W parametrach funckji została ograniczona maksymalna liczba iteracji algorytmu do wartośći 1000
+
+```{r}
+ga_result <- function(func, lbound, ubound){
+  result <- ga(type = "real-valued", fitness =function(x) - func(x), maxiter = 1000, monitor = FALSE, lower = c(th = lbound), upper = ubound)
+  return(result@fitnessValue*(-1))
+};
+```
+
+## Wizualizacja
+
+### Porównanie wyników dla poszczególnych wymiarów
+
+```{r main, echo = FALSE}
+run_comparison()
+```
+
+```{r main, echo=FALSE}
+data <- data_frame(method = c(rep("PRS2D",length(ack2d_prs)),rep("GA2D",length(ack2d_ga))),value = c(ack2d_prs,ack2d_ga))
+ggplot(data=data, aes(x= method, y=value)) +
+  geom_boxplot()+
+  ggtitle("Ackley")
+```
