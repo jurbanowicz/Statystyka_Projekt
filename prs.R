@@ -16,10 +16,10 @@ prs <- function(func, lbound, upbound, dims) {
 # Ackley
 n <- 2
 ackley <- makeAckleyFunction(c(n))
-result <- replicate(100, prs(ackley, rep(1, n), rep(100, n), n))
-result
-mean(result)
-hist(result, main = paste("Ackley  histogram for ", n, " dimensions"))
+res <- replicate(100, prs(ackley, rep(1, n), rep(100, n), n))
+res
+mean(res)
+hist(res, main = paste("Ackley  histogram for ", n, " dimensions"))
 boxplot(res, main = paste("Ackley boxplot for ", n, " dimensions"))
 
 
