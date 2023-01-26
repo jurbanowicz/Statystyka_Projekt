@@ -14,7 +14,7 @@ prs <- function(func, lbound, upbound, dims) {
 };
 
 ga_result <- function(func, lbound, ubound){
-  result <- ga(type = "real-valued", fitness =function(x) - func(x), maxiter = 1000, monitor = FALSE, lower = c(th = lbound), upper = ubound)
+  result <- ga(type = "real-valued", fitness =function(x) -func(x), maxiter = 1000, monitor = FALSE, lower = c(th = lbound), upper = ubound)
   return(result@fitnessValue*(-1))
 };
 
@@ -29,6 +29,8 @@ rastrigin20d <- makeRastriginFunction(c(20))
 
 getParamSet(ackley2d)
 getParamSet(rastrigin2d)
+getGlobalOptimum(ackley2d)
+getGlobalOptimum(rastrigin2d)
 
 ack2d_prs <- replicate(50, prs(ackley2d, rep(-32, 2), rep(32, 2), 2))
 ack10d_prs <- replicate(50, prs(ackley10d, rep(-32, 10), rep(32, 10), 10))
@@ -94,6 +96,9 @@ t.test(ack20d_prs, ack20d_ga)
 t.test(ras2d_prs, ras2d_ga)
 t.test(ras10d_prs, ras10d_ga)
 t.test(ras20d_prs, ras20d_ga)
+
+t.test(ras2d_prs)
+t.test(ras2d_ga)
 
 # should add for all possibilities
 library(ggplot2)
